@@ -1,8 +1,11 @@
 from logic import *
 
-rain = Symbol("rain")   
-hagrid = Symbol("hagrid")
-dumbledore = Symbol("dumbledore")
+rain = Symbol("rain")   # It is raining.
+hagrid = Symbol("hagrid")   # Harry visited Hagrid.
+dumbledore = Symbol("dumbledore")   # Harry visited Dumbledore.
+
+sentence = And(rain,hagrid)     # test
+
 
 knowledge = And(
     Implication(Not(rain), hagrid),
@@ -11,4 +14,6 @@ knowledge = And(
     dumbledore
 )
 
+# print(sentence.formula())
+print(knowledge.formula())
 print(model_check(knowledge, rain))
