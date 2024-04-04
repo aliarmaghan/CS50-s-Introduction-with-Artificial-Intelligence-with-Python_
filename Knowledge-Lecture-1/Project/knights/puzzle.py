@@ -24,7 +24,14 @@ knowledge0 = And(
 # A says "We are both knaves."
 # B says nothing.
 knowledge1 = And(
-    And(AKnight,BKnight)
+    # A and B are knight or a knave but not both:
+    And(Or(AKnight,AKnave), Not(And(AKnave, AKnight))),
+    And(Or(BKnight,BKnave), Not(And(BKnave, BKnight))),
+    # If A is a knight, A and B are both knaves:
+    Implication(AKnight, And(AKnave, BKnave)),
+    # If A is a knave, his statement is false:
+    Implication(AKnave, Not(And(AKnave, BKnave)))
+
     
 )
 
