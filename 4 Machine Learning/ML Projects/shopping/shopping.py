@@ -110,7 +110,7 @@ def load_data(filename):
 
             # Add evidence line to evidence
             evidence.append(data)
-            # print(evidence)
+
             # Append Labels to List
             labels.append(bools[row['Revenue']])
 
@@ -128,7 +128,15 @@ def train_model(evidence, labels):
     Given a list of evidence lists and a list of labels, return a
     fitted k-nearest neighbor model (k=1) trained on the data.
     """
-    raise NotImplementedError
+    print('Fitting Model using k-Nearest Neighbours Classifier')
+
+    # Initialize k-nearest neighbor model with n_neighbors value as 1
+    K_models = KNeighborsClassifier(n_neighbors=1)
+    
+    # Fit the model on the data
+    K_models.fit(evidence, labels)
+
+    return K_models
 
 
 def evaluate(labels, predictions):
