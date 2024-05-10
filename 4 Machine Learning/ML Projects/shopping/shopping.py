@@ -29,6 +29,7 @@ def main():
     # Train model and make predictions
     model = train_model(X_train, y_train)
     predictions = model.predict(X_test)
+    print(predictions)
     sensitivity, specificity = evaluate(y_test, predictions)
 
     # Print results
@@ -154,7 +155,27 @@ def evaluate(labels, predictions):
     representing the "true negative rate": the proportion of
     actual negative labels that were accurately identified.
     """
-    raise NotImplementedError
+
+    pos_labels = labels.count(1)
+    neg_labels = labels.count(0)
+
+    correct_positive = 0
+    correct_negative = 0
+
+    for i in range(len(predictions)):
+        if predictions[i] == labels[i]:
+            if predictions[i] == 1:
+                correct_positive += 1
+            else:
+                correct_negative += 1
+
+    sensitivity = correct_positive / pos_labels
+    specificity = correct_negative / neg_labels
+
+    return sensitivity, specificity
+
+
+
 
 
 if __name__ == "__main__":
